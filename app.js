@@ -1,66 +1,73 @@
 // setup listener & get all existing todo from localStorage
 function init() {
-    // get the elements of my DOM
-    const addBtn = document.getElementById('addBtn');
-    const todoInput = document.getElementById('todoInput');
+  // get the elements of my DOM
+  const addBtn = document.getElementById("addBtn");
+  const todoInput = document.getElementById("todoInput");
 
-    // setup my event listeners
-    addBtn.addEventListener('click', addTodo);
+  const todosJsonString = '[{"id":1731597966001,"text":"Vacuum the living room"},{"id":1731597966002,"text":"Wash the dishes"},{"id":1731597966003,"text":"Fold the laundry"},{"id":1731597966004,"text":"Dust the shelves"},{"id":1731597966005,"text":"Mop the kitchen floor"},{"id":1731597966006,"text":"Clean the bathroom mirror"},{"id":1731597966007,"text":"Water the plants"},{"id":1731597966008,"text":"Wipe the kitchen counters"},{"id":1731597966009,"text":"Change the bed sheets"},{"id":1731597966010,"text":"Empty the trash bins"},{"id":1731597966011,"text":"Clean the fridge"},{"id":1731597966012,"text":"Scrub the stove top"},{"id":1731597966013,"text":"Organize the pantry"},{"id":1731597966014,"text":"Wipe window sills"},{"id":1731597966015,"text":"Sweep the hallway"},{"id":1731597966016,"text":"Clean the microwave"},{"id":1731597966017,"text":"Rinse recycling and sort"},{"id":1731597966018,"text":"Tidy up the playroom"},{"id":1731597966019,"text":"Disinfect door handles"},{"id":1731597966020,"text":"Wipe the dining table"}]';
 
-    todoInput.addEventListener('keypress', function(event){
-        if (event.key === 'Enter') {
-            addTodo();
-        }
-    });
-    displayTodos();
+  // Save to localStorage
+  localStorage.setItem('todos', todosJsonString);
+
+  // setup my event listeners
+  addBtn.addEventListener("click", addTodo);
+
+  todoInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      addTodo();
+    }
+  });
+  displayTodos();
 }
 
 function addTodo() {
-    console.log('yay');
+  console.log("yay");
 }
 
 // Iterate the todo's in the dom structure
 function displayTodos() {
-    console.log('displaying todo')
-    // identify the placeholder as an element
-    const todoList = document.getElementById('todoList');
+  console.log("displaying todo");
+  // identify the placeholder as an element
+  const todoList = document.getElementById("todoList");
 
-    // get todo's from the localstorage
-    const todos = getTodosFromStorage();
-    console.log(todos);
-    // clear the current list
-    todoList.innerHTML ='';
+  // get todo's from the localstorage
+  const todos = getTodosFromStorage();
+  console.log(todos);
+  // clear the current list
+  todoList.innerHTML = "";
 
-    if (todos.length === 0 ) {
-        // show empty message
-        todoList.innerHTML = '<li class="list-group-item">No notes yet... write some</li>';
-    }
-
-
+  if (todos.length === 0) {
+    // show empty message
+    todoList.innerHTML =
+      '<li class="list-group-item">No notes yet... write some</li>';
+  }
 }
 
-function getTodosFromStorage(){
-    // get the strings from localstorage
-    const todosString = localStorage.getItem('todos');
+function getTodosFromStorage() {
+  // get the strings from localstorage
+  const todosString = localStorage.getItem("todos");
 
-    // if nothing is stores yet, return an empty array
-    if (todosString === null) {
-        return [];
-    }
+  // if nothing is stores yet, return an empty array
+  if (todosString === null) {
+    return [];
+  }
+
+  // Parse  JSON string back into an array
+  return JSON.parse(todosString);
 }
 
 // Function to add todo's
-    // - get localstorage getten
-    // - parse
-    // - {new} -> add -> {existing}
-    // - string
-    // - set localstorage
-    // - refresh the data
+// - get localstorage getten
+// - parse
+// - {new} -> add -> {existing}
+// - string
+// - set localstorage
+// - refresh the data
 // Function to delete todo's
-    // - get localstorage
-    // - filter all items except {deleted} in new {obj}
-    // - set localstorage
-    // - refresh the data
+// - get localstorage
+// - filter all items except {deleted} in new {obj}
+// - set localstorage
+// - refresh the data
 // Chilax and enjoy the weekend 😇
 
 init();
