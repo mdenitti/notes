@@ -19,11 +19,36 @@ function addTodo() {
     console.log('yay');
 }
 
+// Iterate the todo's in the dom structure
 function displayTodos() {
     console.log('displaying todo')
+    // identify the placeholder as an element
+    const todoList = document.getElementById('todoList');
+
+    // get todo's from the localstorage
+    const todos = getTodosFromStorage();
+    console.log(todos);
+    // clear the current list
+    todoList.innerHTML ='';
+
+    if (todos.length === 0 ) {
+        // show empty message
+        todoList.innerHTML = '<li class="list-group-item">No notes yet... write some</li>';
+    }
+
+
 }
 
-// Iterate the todo's in the dom structure
+function getTodosFromStorage(){
+    // get the strings from localstorage
+    const todosString = localStorage.getItem('todos');
+
+    // if nothing is stores yet, return an empty array
+    if (todosString === null) {
+        return [];
+    }
+}
+
 // Function to add todo's
     // - get localstorage getten
     // - parse
