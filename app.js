@@ -63,6 +63,48 @@ function getTodosFromStorage() {
 // - string
 // - set localstorage
 // - refresh the data
+
+/**
+ * Add a new todo item
+ * returns {void}
+ * Validates input, saves to localStorage, and updates display
+ */
+function addTodo() {
+    // Get the input element
+    const todoInput = document.getElementById('todoInput');
+    
+    // Get the todo text and remove extra whitespace
+    const todoText = todoInput.value.trim();
+    
+    // Validate: check if input is not empty
+    if (todoText === '') {
+        alert('Please enter a todo item!');
+        return;
+    }
+    
+    // Get existing todos from localStorage
+    const todos = getTodosFromStorage();
+    
+    // Create a new todo object with unique ID and text
+    const newTodo = {
+        id: Date.now(), // Use timestamp as unique ID
+        text: todoText
+    };
+    
+    // Add the new todo to the array
+    todos.push(newTodo);
+    
+    // Save updated todos array back to localStorage
+    saveTodosToStorage(todos);
+    
+    // Clear the input field
+    todoInput.value = '';
+    
+    // Refresh the display to show the new todo
+    displayTodos();
+}
+
+
 // Function to delete todo's
 // - get localstorage
 // - filter all items except {deleted} in new {obj}
