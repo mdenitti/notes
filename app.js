@@ -187,4 +187,17 @@ function displayTodos() {
     });
 }
 
+/**
+ * Save todos to localStorage
+ * @param {Array} todos - Array of todo objects to save
+ * @return {void}
+ */
+function saveTodosToStorage(todos) {
+    // Convert the todos array to a JSON string
+    const todosString = JSON.stringify(todos);
+    
+    // Save the string to localStorage under the key 'todos'
+    localStorage.setItem('todos', todosString);
+}
+
 init();
