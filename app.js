@@ -134,4 +134,57 @@ function deleteTodo(id) {
     displayTodos();
 }
 
+
+/**
+ * Display all todos on the page
+ * @return {void}
+ * Reads from localStorage and renders each todo item
+ */
+function displayTodos() {
+    // Get the list element where todos will be displayed
+    const todoList = document.getElementById('todoList');
+    
+    // Get todos from localStorage
+    const todos = getTodosFromStorage();
+    
+    // Clear the current list
+    todoList.innerHTML = '';
+    
+    // Check if there are no todos
+    if (todos.length === 0) {
+        // Show a message when list is empty
+        todoList.innerHTML = '<li class="list-group-item empty-message">No todos yet. Add one above!</li>';
+        return;
+    }
+    
+    // Loop through each todo and create list items
+    todos.forEach(function(todo) {
+        // Create a new list item element
+        const li = document.createElement('li');
+        li.className = 'list-group-item todo-item';
+        
+        // Create the todo text span
+        const span = document.createElement('span');
+        span.className = 'todo-text';
+        span.textContent = todo.text;
+        
+        // Create the delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        
+        // Add click event to delete button
+        deleteBtn.addEventListener('click', function() {
+            deleteTodo(todo.id);
+        });
+        
+        // Add the text and button to the list item
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        
+        // Add the list item to the todo list
+        todoList.appendChild(li);
+    });
+}
+
 init();
