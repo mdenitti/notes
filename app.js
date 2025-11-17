@@ -4,10 +4,16 @@ function init() {
   const addBtn = document.getElementById("addBtn");
   const todoInput = document.getElementById("todoInput");
 
+  const clearAllBtn = document.getElementById("clearAllBtn");
+  clearAllBtn.addEventListener("click", function () {
+    localStorage.removeItem("todos");
+    displayTodos();
+  });
+
   const todosJsonString = '[{"id":1731597966001,"text":"Vacuum the living room"},{"id":1731597966002,"text":"Wash the dishes"},{"id":1731597966003,"text":"Fold the laundry"},{"id":1731597966004,"text":"Dust the shelves"},{"id":1731597966005,"text":"Mop the kitchen floor"},{"id":1731597966006,"text":"Clean the bathroom mirror"},{"id":1731597966007,"text":"Water the plants"},{"id":1731597966008,"text":"Wipe the kitchen counters"},{"id":1731597966009,"text":"Change the bed sheets"},{"id":1731597966010,"text":"Empty the trash bins"},{"id":1731597966011,"text":"Clean the fridge"},{"id":1731597966012,"text":"Scrub the stove top"},{"id":1731597966013,"text":"Organize the pantry"},{"id":1731597966014,"text":"Wipe window sills"},{"id":1731597966015,"text":"Sweep the hallway"},{"id":1731597966016,"text":"Clean the microwave"},{"id":1731597966017,"text":"Rinse recycling and sort"},{"id":1731597966018,"text":"Tidy up the playroom"},{"id":1731597966019,"text":"Disinfect door handles"},{"id":1731597966020,"text":"Wipe the dining table"}]';
 
-  // Save to localStorage
-  localStorage.setItem('todos', todosJsonString);
+  // Save to localStorage - dumy data
+  // localStorage.setItem('todos', todosJsonString);
 
   // setup my event listeners
   addBtn.addEventListener("click", addTodo);
@@ -166,7 +172,7 @@ function displayTodos() {
         // Create the todo text span
         const span = document.createElement('span');
         span.className = 'todo-text';
-        span.textContent = todo.text;
+        span.innerHTML = todo.text;
         
         // Create the delete button
         const deleteBtn = document.createElement('button');
